@@ -1,0 +1,29 @@
+# 1. Introduction
+
+Depuis le mois de janvier 2021 le firmware du projet RadioGAGA a été développé par T.BERTHET. La majorité des modules ont été développé. Nous faisons appelle à vous pour la réalisation d'un module afin d'interconnecter 2, voir plusieurs cartes HPAPB. 
+
+# 2. Intégration
+
+Sur la figure @fig:firmware on peut voir les différents modules du firmware. Les modules allant de DSD à Presum ainsi que filter ont déjà été développés et sont présentés dans le CDC. Le modules SumX est donc à developer.
+
+![Structure du firmware de la carte RadioGAGA](figures/radiogaga_firmware.jpg){#fig:firmware}
+
+## 2.1 SumX 
+Ce module doit réaliser 2 actions : 
+
+### 2.1.1 Récupérer les présommations des autres cartes
+
+L'échanges des PréSommations du module Presum se fera via un lien QSFP, fortemment basé sur le module ring_adder.
+Un lien half-duplex suffirai, mais s'il est plus simple d'établir une liaison full-duplex cette option conviendra il faudra juste permettre de configurer les liens d'entrée sorties comme sur la figure @fig:firmware.
+Le module SumX devra échanger un flux 1x19 bits @ 200MS/s ou un flux 2x18 bits @ 200MS/s, soit 7.2Gb/s au maximum.
+
+### 2.1.2 Les sommer
+Une fois les données récupérés ,par le biais de backpressure et de FIFOs, le module attend que la première pré-somme de la carte courante et celle de la carte distante soient disponible
+pour commencer la somme et ainsi garantir la synchronisation des sommes des 2 cartes. On pourra
+via un registre ignorer le flux de pré-sommation distant pour ne travailler qu’avec une unique carte.
+
+# 3. Instanciation
+
+Tous les module du firmware sont instanciés dans le module radiogaga.vhd. Ils sont chaînés les uns à la suite des autres. Il serait souhaitable que les deux modules soit instanciés de la même façon. 
+
+![Instanciation](figures/Instanciation.jpg){#fig:instanciation}
