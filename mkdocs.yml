@@ -1,0 +1,85 @@
+site_name: RadioGaGa
+copyright: Copyright &copy; 2020 - 2021
+site_author: Thomas BERTHET
+use_directory_urls: false   
+dev_addr: '0.0.0.0:8000'
+
+extra:
+  svn:
+    id: "$Id: mkdocs.yml 9825 2021-06-18 16:52:14Z berthet $"
+    rev: "$Revision:: 9825  $"
+    date: "$Date:: 2021-06-14 $"
+    autor: "$Author:: berthet $"
+nav : 
+  - Home: index.md
+
+  - Firmware: 
+    - Signal Processing : 
+      - IPD: firmware/IPD.md
+      - DCB: firmware/DCB.md
+      - Presum: firmware/Presum.md
+      - Filter: firmware/Filter.md
+    - UDP_sender: firmware/UDP_sender.md
+    - Trigger: firmware/Trigger.md
+  - Software: 
+    - Configuration files : software/Configuration_files.md
+    - Startup sequence: software/Startup_sequence.md
+    - Running mode : software/running_mode.md
+  - Divers:
+    - PyFDA: divers/PyFDA.md
+
+  - Changelog: changelog.md
+
+theme: 
+  name: material
+  # custom_dir: docs/overrides
+  favicon: figures/cropped-icone_station_carre-32x32.png
+  logo: figures/logo.svg
+  features:
+    - navigation.tabs.sticky
+    - navigation.top
+   
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex: 
+      generic: true
+
+plugins:
+    - search
+    - print-site:
+        add_to_navigation: true
+        print_page_title: 'RadioGaGA'
+        add_print_site_banner: true
+        path_to_pdf: "RadioGaGA.pdf"
+
+
+
+    #- img2fig
+    #- with-pdf: 
+    #    #heading_shift: false
+    #    cover_subtitle: Radio Gammas Gerbe Atmosphériques
+    #    toc_level: 3
+    #    ordered_chapter_level: 3
+    #    enabled_if_env: PDF_ENABLED
+    #    output_path: RadioGaGa.pdf
+    #    #render_js: true
+    #    #headless_chrome_path: google-chrome-stable
+    #    cover_logo: figures/first_page.jpg  
+
+extra_javascript: 
+  # For mathematic equations
+  - assets/javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    
+extra_css:
+    - assets/css/template_pdf.css
+    - assets/css/pdf-print.css
+    - assets/css/extra.css
+
+
